@@ -5,6 +5,9 @@ Settings for global.
 # Scrapy settings of this project
 #####################################################################
 # scrapy basic info
+
+from haipproxy.config.secret_settings import REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_DB, SPLASH_URL
+
 BOT_NAME = 'haiproxy'
 SPIDER_MODULES = ['haipproxy.crawler.spiders', 'haipproxy.crawler.validators']
 NEWSPIDER_MODULE = 'haipproxy.crawler'
@@ -24,7 +27,7 @@ HTTPCACHE_ENABLED = False
 GFW_PROXY = 'http://127.0.0.1:8123'
 
 # splash settings.If you use docker-compose,SPLASH_URL = 'http://splash:8050'
-SPLASH_URL = 'http://127.0.0.1:8050'
+SPLASH_URL = SPLASH_URL
 
 # extension settings
 RETRY_ENABLED = False
@@ -57,10 +60,10 @@ LOG_LEVEL = 'DEBUG'
 
 # redis settings.If you use docker-compose, REDIS_HOST = 'redis'
 # if some value is empty, set like this: key = ''
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6379
-REDIS_PASSWORD = '123456'
-REDIS_DB = 0
+REDIS_HOST = REDIS_HOST
+REDIS_PORT = REDIS_PORT
+REDIS_PASSWORD = REDIS_PASSWORD
+REDIS_DB = REDIS_DB
 
 # scheduler settings
 TIMER_RECORDER = 'haipproxy:scheduler:task'
@@ -94,11 +97,15 @@ TEMP_HTTPS_QUEUE = 'haipproxy:https:temp'
 TEMP_WEIBO_QUEUE = 'haipproxy:weibo:temp'
 TEMP_ZHIHU_QUEUE = 'haipproxy:zhihu:temp'
 
+TEMP_MFW_QUEUE = 'haipproxy:mfw.temp'
+
 # valited queues are zsets.squid and other clients fetch ip resources from them.
 VALIDATED_HTTP_QUEUE = 'haipproxy:validated:http'
 VALIDATED_HTTPS_QUEUE = 'haipproxy:validated:https'
 VALIDATED_WEIBO_QUEUE = 'haipproxy:validated:weibo'
 VALIDATED_ZHIHU_QUEUE = 'haipproxy:validated:zhihu'
+
+VALIDATED_MFW_QUEUE = 'haipproxy:validated:mfw'
 
 # time to live of proxy ip resources
 TTL_VALIDATED_RESOURCE = 2  # minutes
@@ -107,11 +114,15 @@ TTL_HTTPS_QUEUE = 'haipproxy:ttl:https'
 TTL_WEIBO_QUEUE = 'haipproxy:ttl:weibo'
 TTL_ZHIHU_QUEUE = 'haipproxy:ttl:zhihu'
 
+TTL_MFW_QUEUE = 'haipproxy:ttl:mfw'
+
 # queue for proxy speed
 SPEED_HTTP_QUEUE = 'haipproxy:speed:http'
 SPEED_HTTPS_QUEUE = 'haipproxy:speed:https'
 SPEED_WEIBO_QUEUE = 'haipproxy:speed:weibo'
 SPEED_ZHIHU_QUEUE = 'haipproxy:speed:zhihu'
+
+SPEED_MFW_QUEUE = 'haipproxy:speed:mfw'
 
 # squid settings on linux os
 # execute sudo chown -R $USER /etc/squid/ and

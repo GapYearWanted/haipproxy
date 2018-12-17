@@ -230,7 +230,6 @@ def crawler_start(usage, tasks):
     if not spiders:
         #crawler_logger.warning('no spider starts up, please check your task input')
         return
-
     settings = get_project_settings()
     configure_logging(settings)
     runner = CrawlerRunner(settings)

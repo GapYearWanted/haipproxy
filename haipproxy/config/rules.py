@@ -13,7 +13,8 @@ from ..config.settings import (
     VALIDATED_WEIBO_QUEUE, TTL_WEIBO_QUEUE,
     SPEED_WEIBO_QUEUE, TEMP_ZHIHU_QUEUE,
     VALIDATED_ZHIHU_QUEUE, TTL_ZHIHU_QUEUE,
-    SPEED_ZHIHU_QUEUE)
+    SPEED_ZHIHU_QUEUE,
+    TEMP_MFW_QUEUE, VALIDATED_MFW_QUEUE, TTL_MFW_QUEUE, SPEED_MFW_QUEUE)
 
 
 __all__ = ['CRAWLER_TASKS', 'VALIDATOR_TASKS', 'CRAWLER_TASK_MAPS',
@@ -22,6 +23,7 @@ __all__ = ['CRAWLER_TASKS', 'VALIDATOR_TASKS', 'CRAWLER_TASK_MAPS',
 
 
 CRAWLER_TASKS = [
+
     {
         'name': 'mogumiao.com',
         'resource': ['http://www.mogumiao.com/proxy/free/listFreeIp',
@@ -755,12 +757,19 @@ VALIDATOR_TASKS = [
         'task_queue': TEMP_WEIBO_QUEUE,
         'resource': VALIDATED_WEIBO_QUEUE,
         'interval': 5,
-        'enable': 1,
+        'enable': 0,
     },
     {
         'name': 'zhihu',
         'task_queue': TEMP_ZHIHU_QUEUE,
         'resource': VALIDATED_ZHIHU_QUEUE,
+        'interval': 5,
+        'enable': 0,
+    },
+    {
+        'name': 'mfw',
+        'task_queue': TEMP_MFW_QUEUE,
+        'resource': VALIDATED_MFW_QUEUE,
         'interval': 5,
         'enable': 1,
     },
@@ -772,11 +781,12 @@ TEMP_TASK_MAPS = {
     'http': TEMP_HTTP_QUEUE,
     'https': TEMP_HTTPS_QUEUE,
     'weibo': TEMP_WEIBO_QUEUE,
-    'zhihu': TEMP_ZHIHU_QUEUE
+    'zhihu': TEMP_ZHIHU_QUEUE,
+    'mfw': TEMP_MFW_QUEUE,
 }
 
 # target website that use http protocol
-HTTP_TASKS = ['http']
+HTTP_TASKS = ['http', 'mfw']
 
 # target website that use https protocol
 HTTPS_TASKS = ['https', 'zhihu', 'weibo']
@@ -787,7 +797,8 @@ SCORE_MAPS = {
     'http': VALIDATED_HTTP_QUEUE,
     'https': VALIDATED_HTTPS_QUEUE,
     'weibo': VALIDATED_WEIBO_QUEUE,
-    'zhihu': VALIDATED_ZHIHU_QUEUE
+    'zhihu': VALIDATED_ZHIHU_QUEUE,
+    'mfw': VALIDATED_MFW_QUEUE,
 }
 
 # validator scheduler and clients will fetch proxies from the following queues which are verified recently
@@ -795,13 +806,15 @@ TTL_MAPS = {
     'http': TTL_HTTP_QUEUE,
     'https': TTL_HTTPS_QUEUE,
     'weibo': TTL_WEIBO_QUEUE,
-    'zhihu': TTL_ZHIHU_QUEUE
+    'zhihu': TTL_ZHIHU_QUEUE,
+    'mfw': TTL_MFW_QUEUE,
 }
 
 SPEED_MAPS = {
     'http': SPEED_HTTP_QUEUE,
     'https': SPEED_HTTPS_QUEUE,
     'weibo': SPEED_WEIBO_QUEUE,
-    'zhihu': SPEED_ZHIHU_QUEUE
+    'zhihu': SPEED_ZHIHU_QUEUE,
+    'mfw': SPEED_MFW_QUEUE,
 }
 
