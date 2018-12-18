@@ -97,7 +97,7 @@ TEMP_HTTPS_QUEUE = 'haipproxy:https:temp'
 TEMP_WEIBO_QUEUE = 'haipproxy:weibo:temp'
 TEMP_ZHIHU_QUEUE = 'haipproxy:zhihu:temp'
 
-TEMP_MFW_QUEUE = 'haipproxy:mfw.temp'
+TEMP_MFW_QUEUE = 'haipproxy:mfw:temp'
 
 # valited queues are zsets.squid and other clients fetch ip resources from them.
 VALIDATED_HTTP_QUEUE = 'haipproxy:validated:http'

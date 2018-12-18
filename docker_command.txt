@@ -1,0 +1,10 @@
+python3 crawler_booter.py --usage crawler common
+python3 scheduler_booter.py --usage crawler common
+python3 crawler_booter.py --usage validator init mfw
+python3 scheduler_booter.py --usage crawler mfw
+
+
+docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_common_crawler1 lovehuan/base:1.4 python3 crawler_booter.py --usage crawler common
+docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_common_crawler_scheduler lovehuan/base:1.4 python3 scheduler_booter.py --usage crawler common
+docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_mfw_validator lovehuan/base:1.4 python3 crawler_booter.py --usage validator init mfw
+docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_mfw_validator_scheduler lovehuan/base:1.4 python3 scheduler_booter.py --usage validator mfw
