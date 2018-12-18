@@ -68,12 +68,15 @@ class ProxyCommonPipeline(BasePipeline):
                 pipe.zrem(item['queue'], item['url'])
                 pipe.execute()
             elif item['incr'] < 0 and 1 < score:
-                self.redis_con.zincrby(item['queue'], item['url'], -1)
+                #self.redis_con.zincrby(item['queue'], item['url'], -1)
+                self.redis_con.zincrby(item['queue'], -1, item['url'])
             elif item['incr'] > 0 and score < 10:
-                self.redis_con.zincrby(item['queue'], item['url'], 1)
+                #self.redis_con.zincrby(item['queue'], item['url'], 1)
+                self.redis_con.zincrby(item['queue'], 1, item['url'])
             elif item['incr'] > 0 and score >= 10:
                 incr = round(10 / score, 2)
-                self.redis_con.zincrby(item['queue'], item['url'], incr)
+                #self.redis_con.zincrby(item['queue'], item['url'], incr)
+                self.redis_con.zincrby(item['queue'], incr, item['url'])
 
     def _process_verified_item(self, item, spider):
         if item['incr'] == '-inf' or item['incr'] < 0:
