@@ -28,8 +28,8 @@ def fetch_proxy(tmpl, strategy):
 def fetch_proxies(tmpl, strategy):
     if tmpl not in fetchers:
         fetchers[tmpl] = generate_fetchers(tmpl)
-    return fetchers[tmpl][strategy].get_proxies()
-
+    result = fetchers[tmpl][strategy].get_proxies()
+    return list(set(result))
 
 class GetProxy(object):
 
@@ -49,9 +49,10 @@ class GetProxies(object):
         tmpl = req.get_param("tmpl", required=True)
         strategy = req.get_param("strategy", default=DEFAULT_STRATEGY)
         strategy = strategy if strategy in ("robin", "greedy") else DEFAULT_STRATEGY
-        resp.body = fetch_proxies(tmpl, strategy)
+        resp.body = '\n'.join(fetch_proxies(tmpl, strategy))
 
 app = falcon.API()
 proxy = GetProxy()
+proxies = GetProxies()
 app.add_route("/get_proxy", proxy)
-app.add_route("/get_proxies", proxy)
+app.add_route("/get_proxies", proxies)
