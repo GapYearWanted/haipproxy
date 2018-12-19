@@ -9,4 +9,4 @@ docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name pr
 docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_common_crawler_scheduler lovehuan/base:1.4 python3 scheduler_booter.py --usage crawler common
 docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_mfw_validator lovehuan/base:1.4 python3 crawler_booter.py --usage validator mfw
 docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_mfw_validator_scheduler lovehuan/base:1.4 python3 scheduler_booter.py --usage validator mfw
-docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d --name proxy_api lovehuan/base:1.4 gunicorn -b 127.0.0.1:8888 cli_api:app
+docker run -it -v /data/www/spider/haipproxy:/haiproxy -w /haiproxy -d -p 8888:8888 --name proxy_api lovehuan/base:1.4 gunicorn -b 127.0.0.1:8888 cli_api:app
